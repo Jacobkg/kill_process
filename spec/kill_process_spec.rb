@@ -1,4 +1,4 @@
-require_relative '../lib/system_timer'
+require_relative '../lib/kill_process'
 require 'benchmark'
 
 describe "Killing Process" do
@@ -10,7 +10,7 @@ describe "Killing Process" do
       end
       expect(elapsed).to be_within(0.1).of(2)
     else
-      SystemTimer.kill_process_after(2)
+      KillProcess.after(2)
       sleep 5
     end
   end

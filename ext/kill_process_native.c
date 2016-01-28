@@ -37,8 +37,8 @@ VALUE rb_posix_timer_set(VALUE self, VALUE seconds) {
   return Qtrue;
 }
 
-void Init_itimer_native(void) {
+void Init_kill_process_native(void) {
   VALUE kill_process_module = rb_const_get(rb_cObject, rb_intern("KillProcess"));
 
-  rb_define_singleton_method(kill_process_module, "rb_posix_timer_set", rb_posix_timer_set, 1);
+  rb_define_singleton_method(kill_process_module, "posix_timer_set", rb_posix_timer_set, 1);
 }
