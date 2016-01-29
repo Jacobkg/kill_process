@@ -1,6 +1,6 @@
 # KillProcess
 
-Normally when you want to make sure that a block of code in Ruby does not run longer than a maximum amount of time, you would use `Timeout` from the standard library. http://ruby-doc.org/stdlib-2.3.0/libdoc/timeout/rdoc/Timeout.html. While this works most of the time, in some edge cases it fails to stop the process. See, for example http://www.mikeperham.com/2015/05/08/timeout-rubys-most-dangerous-api/.
+Normally when you want to make sure that a block of code in Ruby does not run longer than a maximum amount of time, you would use `Timeout` from the standard library (http://ruby-doc.org/stdlib-2.3.0/libdoc/timeout/rdoc/Timeout.html). While this works most of the time, in some edge cases it fails to stop the process. See, for example http://www.mikeperham.com/2015/05/08/timeout-rubys-most-dangerous-api/.
 
 This gem provides a backstop in the case that you absolutely, positvely want your process to die after N seconds have elapsed. It is implemented using POSIX advanced realtime timers, in particular `timer_create` (http://man7.org/linux/man-pages/man2/timer_create.2.html) and `timer_settime` (http://man7.org/linux/man-pages/man2/timer_settime.2.html).
 
@@ -30,8 +30,15 @@ Or install it yourself as:
 
 ## Usage
 
+Because `KillProcess` is a very dirty way to kill your process (does not allow for cleanup), I like to use it as a backstop to the standard ruby `Timeout`. For example
+
 ```ruby
-KillProcess.after(10)
+KillProcess.after(75)
+Timeout::timeout(60) do
+  # Something expected to take less than 60 seconds
+end
+# Exit here. This library does not currently support unsetting the timer 
+# so if you don't exit within 75 seconds it will die
 ```
 
 ## License
