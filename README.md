@@ -41,6 +41,13 @@ end
 # so if you don't exit within 75 seconds it will die
 ```
 
+## Acknowledgements
+
+The bulk of the structure of this gem is inspired (aka copied) from https://github.com/retailnext/ruby-itimer
+
+I learned about system timers from 'The Linux Programming Interface' by Michael Kerrisk. I highly recommend reading it cover to cover (http://man7.org/tlpi/)
+
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
